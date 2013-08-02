@@ -44,6 +44,7 @@ XivelyFeed feed(FEED_ID, datastreams, 2);       // Creating the feed, defining t
 XivelyClient xivelyclient(client);              // Telling Xively to use the correct client
 
 Temperature temp;
+float temperature;
 
 void setup(void) {                              // Connecting to network, initiating GPRS connection
  pinMode(redLed, OUTPUT);
@@ -70,7 +71,7 @@ void setup(void) {                              // Connecting to network, initia
 void loop(void) {
   if((millis()-lastTime)>=60000){               // If 1 min has elapsed
     lastTime = millis();
-    float temperature = temp.getTemp(water);    // Get the temperature of the water
+    temperature = temp.getTemp(water);    // Get the temperature of the water
     datastreams[0].setFloat(temperature);       // Add temperature to Xively stream
     temperature = temp.getTemp(air);            // Get the temperature of the air
     datastreams[1].setFloat(temperature);
