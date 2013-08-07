@@ -13,8 +13,8 @@
 #include <Temperature.h>
 #include <LowPower.h>
 
-#define PINNUMBER "INSERT_PIN"          // SIM PIN
-#define GPRS_APN "INSERT_APN"        // Access Point Name
+#define PINNUMBER "INSERT_PIN"           // SIM PIN
+#define GPRS_APN "INSERT_APN"            // Access Point Name
 #define GPRS_LOGIN "INSERT_USERNAME"     // Username (phone number)
 #define GPRS_PASSWORD "INSERT_PASSWORD"  // Password (phone number)
 
@@ -25,7 +25,7 @@ GSM gsmAccess;
 int water_pin = 12;      // Water temperature sensor pin  (13)
 int air_pin = 13;        // Air temperature sensor pin  (12)
 int redLed = 10;         // Red LED pin
-int greenLed = 8;       // Green LED pin
+int greenLed = 8;        // Green LED pin
 int wait = 0;
 
 boolean notConnected = true;
@@ -34,7 +34,7 @@ OneWire water(water_pin);
 OneWire air(air_pin);
 
 #define FEED_ID INSERT_FEEDID
-char xivelyKey[] = "INSERT_API_KEY";    // Set the Xively API key
+char xivelyKey[] = "INSERT_API_KEY";            // Set the Xively API key
 
 char myWaterTempStream[] = "water";             // Set stream name (need to match Xively name)
 char myAirTempStream[] = "air";                 // Set 2nd stream name
@@ -54,7 +54,7 @@ float temperature;
 void setup(void) {                              // Connecting to network, initiating GPRS connection
   pinMode(redLed, OUTPUT);
   pinMode(greenLed, OUTPUT);
-  digitalWrite(redLed, HIGH);                 // Red LED while not connected
+  digitalWrite(redLed, HIGH);                   // Red LED while not connected
   digitalWrite(greenLed, LOW);
 }
 
@@ -78,7 +78,7 @@ void loop(void) {
       digitalWrite(redLed, LOW);
     }
     closeConnection();
-    wait=0;                                     // Reset sleep-counter
+    wait=0;                                       // Reset sleep-counter
   }
   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF); // Enter power down state for 8 s with ADC and BOD module disabled
   wait++;
