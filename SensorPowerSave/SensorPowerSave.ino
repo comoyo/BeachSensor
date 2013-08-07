@@ -62,7 +62,7 @@ void setup(void) {                              // Connecting to network, initia
 void loop(void) {
   if(wait>=25){                                 // If slept 25 times
     startConnection();
-    temperature = temp.getTemp(water);    // Get the temperature of the water
+    temperature = temp.getTemp(water);          // Get the temperature of the water
     datastreams[0].setFloat(temperature);       // Add temperature to Xively stream
     temperature = temp.getTemp(air);            // Get the temperature of the air
     datastreams[1].setFloat(temperature);
@@ -86,6 +86,7 @@ void loop(void) {
 
 void startConnection(){
   while (notConnected) {
+    digitalWrite(3,HIGH);                       // Enable the RX pin
     if(gsmAccess.begin(PINNUMBER)==GSM_READY){
       delay(3000);
       if(gprs.attachGPRS(GPRS_APN, GPRS_LOGIN, GPRS_PASSWORD)==GPRS_READY){
@@ -105,6 +106,8 @@ void startConnection(){
 void closeConnection(){
   while(notConnected==false){
     if(gsmAccess.shutdown()){
+      delay(1000);
+      digitalWrite(3,LOW);                    // Disable the RX pin
       notConnected = true;
       digitalWrite(redLed, LOW);              // Turn LEDs off
       digitalWrite(greenLed, LOW);
